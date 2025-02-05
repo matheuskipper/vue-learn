@@ -1,10 +1,14 @@
 <template>
-  <div class="container">
-    <h1 id="titulo" class="text-3xl font-bold p-4">
+  <div class="w-[100%] flex flex-col justify center items-center bg-[#d5f5a2]">
+    <h1 id="titulo" class="text-5xl font-bold p-4 text-[#7FFFD4] text-shadow">
       Personagens de Rick and Morty
     </h1>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-5">
-      <div v-for="character in characters" :key="character.id" class="card">
+      <div
+        v-for="character in characters"
+        :key="character.id"
+        class="bg-[#FFFFFF] p-4 rounded-lg shadow-lg"
+      >
         <img
           :src="character.image"
           :alt="character.name"
@@ -40,21 +44,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  text-align: center;
-  background: #d5f5a2;
-  width: 100vw;
-  margin: 0;
-  padding: 0;
-}
-.card {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
 #titulo {
-  color: aquamarine;
   text-shadow: 2px 2px 4px #000000;
 }
 </style>
