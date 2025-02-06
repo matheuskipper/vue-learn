@@ -1,6 +1,9 @@
 <template>
   <div class="w-[100%] flex flex-col justify center items-center bg-[#d5f5a2]">
-    <h1 id="titulo" class="text-5xl font-bold p-4 text-[#7FFFD4] text-shadow">
+    <h1
+      id="titulo"
+      class="text-5xl font-bold p-4 text-[#7FFFD4] text-shadow font-mono"
+    >
       Personagens de Rick and Morty
     </h1>
 
@@ -26,11 +29,11 @@
         <p>Status: {{ character.status }}</p>
       </div>
     </div>
-    <div class="flex justify-center mt-5 gap-2 mb-5">
+    <div class="flex justify-center mt-5 gap-2 mb-18 mt-10">
       <button
         @click="prevPage"
         :disabled="currentPage === 1"
-        class="px-4 py-2 bg-gray-500 text-white rounded-md"
+        class="px-4 py-2 bg-[#00ad6b] hover:bg-[#006d43] text-white font-bold rounded-md cursor-pointer"
       >
         Anterior
       </button>
@@ -40,7 +43,7 @@
       <button
         @click="nextPage"
         :disabled="currentPage === totalPages"
-        class="px-4 py-2 bg-gray-500 text-white rounded-md"
+        class="px-4 py-2 bg-[#00ad6b] hover:bg-[#006d43] text-white font-bold rounded-md cursor-pointer"
       >
         Próxima
       </button>
