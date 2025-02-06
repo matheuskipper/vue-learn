@@ -3,9 +3,17 @@
     <h1 id="titulo" class="text-5xl font-bold p-4 text-[#7FFFD4] text-shadow">
       Personagens de Rick and Morty
     </h1>
+
+    <input
+      v-model="searchTerm"
+      type="text"
+      placeholder="Buscar personagem"
+      class="border-2 border-[#7FFFD4] p-2 m-2 rounded-md shadow-lg w-[20rem] mb-5"
+    />
+
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-5">
       <div
-        v-for="character in characters"
+        v-for="character in filteredCharacters"
         :key="character.id"
         class="bg-[#FFFFFF] p-4 rounded-lg shadow-lg"
       >
@@ -27,6 +35,7 @@ export default {
   data() {
     return {
       characters: [],
+      searchTerm: "",
     };
   },
   async created() {
@@ -39,6 +48,13 @@ export default {
     } catch (error) {
       console.error("Erro ao buscar personagens:", error);
     }
+  },
+  computed: {
+    filteredCharacters() {
+      return this.characters.filter((character) =>
+        character.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    },
   },
 };
 </script>
