@@ -14,46 +14,35 @@
       class="border-2 border-[#7FFFD4] p-2 m-2 rounded-md shadow-lg w-[20rem] mb-5 mt-7"
     />
 
+    <!--  Passando as props para o componente -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-5">
-      <div
+      <CharacterCard
         v-for="character in paginatedCharacters"
         :key="character.id"
-        class="bg-[#FFFFFF] p-4 rounded-lg shadow-lg"
-      >
-        <img
-          :src="character.image"
-          :alt="character.name"
-          class="rounded-lg shadow-lg"
-        />
-        <h2 class="text-xl font-semibold">{{ character.name }}</h2>
-        <p>Status: {{ character.status }}</p>
-      </div>
+        :image="character.image"
+        :name="character.name"
+        :status="character.status"
+      />
     </div>
-    <div class="flex justify-center mt-5 gap-2 mb-18 mt-10">
-      <button
-        @click="prevPage"
-        :disabled="currentPage === 1"
-        class="px-4 py-2 bg-[#00ad6b] hover:bg-[#006d43] text-white font-bold rounded-md cursor-pointer"
-      >
-        Anterior
-      </button>
-      <span class="text-lg font-semibold">
-        Página {{ currentPage }} de {{ totalPages }}
-      </span>
-      <button
-        @click="nextPage"
-        :disabled="currentPage === totalPages"
-        class="px-4 py-2 bg-[#00ad6b] hover:bg-[#006d43] text-white font-bold rounded-md cursor-pointer"
-      >
-        Próxima
-      </button>
-    </div>
+
+    <Pagination
+      :currentPage="currentPage"
+      :totalPages="totalPages"
+      @prev="prevPage"
+      @next="nextPage"
+    />
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import CharacterCard from "./components/CharacterCard.vue";
+import Pagination from "./components/Pagination.vue";
 export default {
+  components: {
+    CharacterCard,
+    Pagination,
+  },
   data() {
     return {
       characters: [],
