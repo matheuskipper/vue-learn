@@ -4,13 +4,13 @@
       id="titulo"
       class="text-5xl font-bold p-4 text-[#7FFFD4] text-shadow font-mono"
     >
-      Personagens de Rick and Morty
+      Rick & Morty - Characters
     </h1>
 
     <input
       v-model="searchTerm"
       type="text"
-      placeholder="Buscar personagem"
+      placeholder="Search character"
       class="border-2 border-[#7FFFD4] p-2 m-2 rounded-md shadow-lg w-[20rem] mb-5 mt-7"
     />
 
@@ -18,10 +18,9 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-5">
       <CharacterCard
         v-for="character in paginatedCharacters"
-        :key="character.id"
-        :image="character.image"
-        :name="character.name"
-        :status="character.status"
+        :character="character"
+        @click="openModal(character)"
+        class="cursor-pointer"
       />
     </div>
 
@@ -31,6 +30,13 @@
       @prev="prevPage"
       @next="nextPage"
     />
+
+    <CharacterModal
+      v-if="selectedCharacter"
+      :character="selectedCharacter"
+      :isOpen="modalOpen"
+      @close="closeModal"
+    />
   </div>
 </template>
 
@@ -38,10 +44,12 @@
 import axios from "axios";
 import CharacterCard from "./components/CharacterCard.vue";
 import Pagination from "./components/Pagination.vue";
+import CharacterModal from "./components/CharacterModal.vue";
 export default {
   components: {
     CharacterCard,
     Pagination,
+    CharacterModal,
   },
   data() {
     return {
@@ -49,6 +57,8 @@ export default {
       searchTerm: "",
       currentPage: 1,
       itemsPerPage: 8,
+      selectedCharacter: null,
+      modalOpen: false,
     };
   },
   async created() {
@@ -87,6 +97,14 @@ export default {
       if (this.currentPage < this.totalPages) {
         this.currentPage++;
       }
+    },
+    openModal(character) {
+      this.selectedCharacter = character;
+      this.modalOpen = true;
+    },
+    closeModal() {
+      this.selectedCharacter = null;
+      this.modalOpen = false;
     },
   },
   watch: {
