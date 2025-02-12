@@ -17,6 +17,9 @@
     />
 
     <div v-if="loading" class="text-center text-2xl font-bold mt-10">
+      <div
+        class="animate-spin rounded-full h-10 w-10 border-t-4 border-b-4 border-black"
+      ></div>
       Loading...
     </div>
 
