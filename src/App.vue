@@ -4,7 +4,7 @@
   >
     <h1
       id="titulo"
-      class="text-5xl font-bold p-4 text-[#7FFFD4] text-shadow font-mono"
+      class="text-[66px] font-bold p-4 text-[#7FFFD4] text-shadow font-mono"
     >
       Rick & Morty - Characters
     </h1>
@@ -13,7 +13,7 @@
       v-model="searchTerm"
       type="text"
       placeholder="Search character"
-      class="border-2 border-[#7FFFD4] p-2 m-2 rounded-md shadow-lg w-[20rem] mb-5 mt-7"
+      class="border-2 border-[#4F4F4F] p-2 m-2 rounded-md shadow-lg w-[20rem] mb-5 mt-7"
     />
 
     <div v-if="loading" class="text-center text-2xl font-bold mt-10">
