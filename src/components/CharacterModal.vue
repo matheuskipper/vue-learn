@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="isOpen"
-    class="fixed inset-0 flex items-center justify-center bg-[#d5f5a2] bg-opacity-50"
-  >
+  <div v-if="isOpen" class="fixed inset-0 flex items-center justify-center">
     <div class="bg-white p-5 rounded-lg shadow-lg max-w-md">
       <button
         @click="$emit('close')"
