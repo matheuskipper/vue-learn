@@ -1,5 +1,7 @@
 <template>
-  <div class="w-[100%] flex flex-col justify center items-center bg-[#d5f5a2]">
+  <div
+    class="w-full min-h-screen flex flex-col justify center items-center bg-[#d5f5a2]"
+  >
     <h1
       id="titulo"
       class="text-5xl font-bold p-4 text-[#7FFFD4] text-shadow font-mono"
@@ -14,8 +16,12 @@
       class="border-2 border-[#7FFFD4] p-2 m-2 rounded-md shadow-lg w-[20rem] mb-5 mt-7"
     />
 
+    <div v-if="loading" class="text-center text-2xl font-bold mt-10">
+      Loading...
+    </div>
+
     <!--  Passando as props para o componente -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-5">
+    <div v-else class="grid grid-cols-2 md:grid-cols-4 gap-4 p-5">
       <CharacterCard
         v-for="character in paginatedCharacters"
         :character="character"
@@ -59,6 +65,7 @@ export default {
       itemsPerPage: 8,
       selectedCharacter: null,
       modalOpen: false,
+      loading: true,
     };
   },
   async created() {
@@ -68,8 +75,14 @@ export default {
       );
       this.characters = response.data.results; // Pegando os personagens
       this.totalPages = Math.ceil(this.characters.length / this.itemsPerPage);
+
+      setTimeout(() => {
+        this.loading = false;
+      }, 1000);
     } catch (error) {
       console.error("Erro ao buscar personagens:", error);
+    } finally {
+      this.loading = false;
     }
   },
   computed: {
@@ -99,17 +112,28 @@ export default {
       }
     },
     openModal(character) {
-      this.selectedCharacter = character;
-      this.modalOpen = true;
+      this.loading = true;
+      setTimeout(() => {
+        this.selectedCharacter = character;
+        this.modalOpen = true;
+        this.loading = false;
+      }, 500);
     },
     closeModal() {
       this.selectedCharacter = null;
       this.modalOpen = false;
     },
+    performSearch() {
+      this.loading = true;
+      setTimeout(() => {
+        this.currentPage = 1;
+        this.loading = false;
+      }, 1000);
+    },
   },
   watch: {
     searchTerm() {
-      this.currentPage = 1;
+      this.performSearch();
     },
   },
 };

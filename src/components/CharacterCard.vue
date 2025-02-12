@@ -6,7 +6,7 @@
       class="rounded-lg shadow-lg mb-3"
     />
     <h2 class="text-xl font-semibold">{{ character.name }}</h2>
-    <!-- <p>Status: {{ character.status }}</p> -->
+    <!-- <p>Status: {{ character.status }}</p> Caso queira exibir o status o card principal -->
   </div>
 </template>
 
