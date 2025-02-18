@@ -6,7 +6,7 @@
   "homepage": "https://matheuskipper/.github.io/vue-learn",
   "scripts": {
     "dev": "vite",
-    "build": "vue-cli-service build",
+    "build": "vite build",
     "deploy": "gh-pages -d dist",
     "preview": "vite preview"
   },
